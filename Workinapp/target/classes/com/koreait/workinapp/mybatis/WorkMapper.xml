@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Work">
+	
+	<!-- 일정 등록 -->
+	<insert id="insertWork" parameterType="Work">
+		insert into work(e_pk,w_date,w_name,w_note,w_master) values(#{e_pk},#{w_date},#{w_name},#{w_note},#{w_master})
+	</insert>
+	
+	<!-- 승인 요청 대기중인 리스트  -->
+	<select id="selectAll" resultType="Work">
+		select * from work where w_status = 0 order by w_pk asc
+	</select>
+	
+	<!-- 승인 요청 완료된 리스트 -->
+	<select id="selectAllByApproval" resultType="Work">
+		select * from work where w_status = 1 order by w_pk asc
+	</select>
+	
+	<!-- 승인 요청 -->
+	<update id="update" parameterType="Work">
+		update work set w_status=1 where w_pk=#{w_pk}
+	</update>
+	
+	<!-- 승인 거절 -->
+	<delete id="delete" parameterType="int">
+		delete from work where w_pk=#{w_pk}
+	</delete>
+	
+	<!-- 특정사원의 승인요청중인 리스트 -->
+	<select id="selectNo" parameterType="int" resultType="Work">
+		select *from work where e_pk=#{e_pk} and w_status=0
+	</select>
+	
+	<!-- 특정사원의 승인완료된 리스트 -->
+	<select id="selectOk" parameterType="int" resultType="Work">
+		select *from work where e_pk=#{e_pk} and w_status=1
+	</select>
+	
+	<!-- 특정사원의 전체 리스트 -->
+	<select id="selectPk" parameterType="int" resultType="Work">
+		select *from work where e_pk=#{e_pk}
+	</select>
+
+</mapper>

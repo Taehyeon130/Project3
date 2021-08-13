@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Commute">
+
+<!-- 출근 등록 -->
+<insert id="insert" parameterType="Commute">
+	insert into commute(e_pk,com_date,com_state) values(#{e_pk},#{com_date},0)
+</insert>
+
+<!-- 퇴근 등록 -->
+<insert id="out" parameterType="Commute">
+	insert into commute(e_pk,com_date,com_state) values(#{e_pk},#{com_date},1)
+</insert>
+
+<!-- 모두  -->
+<select id="selectAll" resultType="Commute">
+	select *from commute
+</select>
+
+<!-- 로그인한 사람꺼만 -->
+<select id="selectByEmployee" resultType="Commute" parameterType="int">
+	select *from commute where e_pk=#{e_pk}
+</select>
+
+</mapper>

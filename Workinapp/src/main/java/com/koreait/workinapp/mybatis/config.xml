@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- 사원 = Employee -->
+		<typeAlias type="com.koreait.workinapp.domain.Employee" alias="Employee"/>	
+		<!-- 휴가 -->
+		<typeAlias type="com.koreait.workinapp.domain.Dayoff" alias="Dayoff"/>
+		<!-- 휴가 카테고리 -->
+		<typeAlias type="com.koreait.workinapp.domain.DayoffCategory" alias="DayoffCategory"/>
+		<!-- 근무 -->
+		<typeAlias type="com.koreait.workinapp.domain.Work" alias="Work"/>		
+		<!-- 회사 -->
+		<typeAlias type="com.koreait.workinapp.domain.Company" alias="Company"/>
+		
+		
+		<!--요청 -->
+		<typeAlias type="com.koreait.workinapp.domain.Requests" alias="Requests"/>
+		<!-- 상위카테고리 -->
+		<typeAlias type="com.koreait.workinapp.domain.TopCategory" alias="TopCategory"/>
+		<!-- 하위카테고리 -->
+		<typeAlias type="com.koreait.workinapp.domain.SubCategory" alias="SubCategory"/>
+		<typeAlias type="com.koreait.workinapp.domain.Commute" alias="Commute"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/koreait/workinapp/mybatis/EmployeeMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/DayoffMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/CompanyMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/CategoryMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/WorkMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/RequestsMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/TopCategoryMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/SubCategoryMapper.xml"/>
+		<mapper resource="com/koreait/workinapp/mybatis/CommuteMapper.xml"/>
+	</mappers>
+</configuration>

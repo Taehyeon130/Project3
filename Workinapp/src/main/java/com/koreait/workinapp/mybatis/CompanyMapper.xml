@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Company">
+
+	<!-- 회사 로그인 -->
+	<select id="select" resultType="Company" parameterType="Company">
+		select * from company where c_pk=#{c_pk} and c_code=#{c_code}
+	</select>
+	<!-- 회사 생성 하기 -->
+	<insert id="insert" parameterType="Company">
+		insert into company(c_name, c_phone, c_addr, c_code) values(#{c_name}, #{c_phone}, #{c_addr},#{ c_code})
+	</insert>
+	
+	<!-- 회사 목록 가져오기 -->
+	<select id="selectAll" resultType="Company">
+		select * from company order by c_pk asc
+	</select>
+	
+	<!-- 회사 수정 -->
+	<update id="update" parameterType="Company">
+		update company set c_addr = #{c_addr} where c_pk=#{c_pk}
+	</update>
+</mapper>

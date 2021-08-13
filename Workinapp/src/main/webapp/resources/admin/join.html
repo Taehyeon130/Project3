@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>test</title>
+<link rel="stylesheet" href="css/join.css">
+</head>
+
+
+<body>
+	<div class="container" id="container">
+		<div class="form-container sign-up-container">
+			<!-- 회원가입 폼 -->
+			<form name="signup" action="signUpOk.th" onsubmit="return chkSubmit()">
+				<h1>회원가입</h1>
+				<input type="email" name="email" placeholder="Email">
+				<input type="text" name="이름" placeholder="이름">
+				<input type="text" name="id" placeholder="ID">
+				<input type="password" name="password" placeholder="Password">
+				<input type="text" name="phone" placeholder="휴대폰'-'없이 숫자만 입력하세요.">
+				<button>회원가입</button>
+			</form>
+		</div>
+		<!-- 회원가입폼 끝 -->
+
+		<!-- 로그인 폼 -->
+		<div class="form-container sign-in-container">
+			<form action="loginOk.th">
+				<h1>로그인</h1>
+				<input type="text" name="mb_id" placeholder="ID" required>
+				<input type="password" name="mb_pw" placeholder="Password" required>
+				<p>
+					계정이 없으신가요?<a href="#">회원가입</a>
+				</p>
+				<button>로그인</button>
+			</form>
+		</div>
+		<!-- 로그인 폼 끝 -->
+
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<a href="main.th"></a>
+					<button class="ghost" id="signIn">로그인</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<a href="main.th"></a>
+					<button class="ghost" id="signUp">회원가입</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 로그인/회원가입 전환 스크립트 -->
+	<script type="text/javascript">
+	     const signUpButton = document.getElementById('signUp');
+	     const signInButton = document.getElementById('signIn');
+	     const container = document.getElementById('container');
+	  
+	     signUpButton.addEventListener('click', () => {
+	        container.classList.add("right-panel-active");
+	     });
+	     signInButton.addEventListener('click', () => {
+	        container.classList.remove("right-panel-active");
+	     });
+  	</script>
+
+	<script>
+		function chkSubmit(){
+			frm = document.forms["signup"];
+			
+			const mb_id = frm["mb_id"].value.trim();
+			const mb_pw = frm["mb_pw"].value.trim();
+			const mb_pwOk = frm["mb_pwOk"].value.trim();
+			const mb_name = frm["mb_name"].value.trim();
+			const mb_tel = frm["mb_tel"].value.trim();
+			const mb_email = frm["mb_email"].value.trim();
+		}
+	</script>
+
+
+
+</body>
+</html>

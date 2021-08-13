@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Employee">
+
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="Employee">
+		insert into employee (e_name, e_id, e_pwd, e_mail, e_level) values(#{e_name}, #{e_id}, #{e_pwd}, #{e_mail}, #{e_level})
+	</insert>
+	
+	<select id="login" resultType="Employee" parameterType="Employee">
+		select * from employee where e_id=#{e_id} and e_pwd=#{e_pwd}
+	</select>
+	
+	<select id="selectAll" resultType="Employee">
+		select * from employee
+	</select>
+	
+	<!-- 매니저 권한의 사용자 리스트 -->
+	<select id="selectManager" resultType="Employee">
+		select *from employee where e_level='Manager'
+	</select>
+	
+	<!-- 직원 권한의 사용자 리스트 -->
+	<select id="selectEmployee" resultType="Employee">
+		select *from employee where e_level='Employee'
+	</select>
+	
+	<!-- 현재 사용자의 정보 -->
+	<select id="selectNow" parameterType="int" resultType="Employee">
+		select *from employee where e_pk=#{e_pk}
+	</select>
+	
+	<!-- 이메일 변경  -->
+	<update id="updateEmail" parameterType="Employee">
+		update employee 
+		set e_mail=#{e_mail}
+		where e_pk=#{e_pk}
+	</update>
+	
+	<!-- 사용자 탈퇴 -->
+	<delete id="out" parameterType="int">
+		delete from employee where e_pk=#{e_pk}
+	</delete>
+</mapper>

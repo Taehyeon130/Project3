@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Requests">
+
+	<!-- 요청 등록 -->
+	<insert id="insert" parameterType="Requests">
+		insert into requests(e_pk,
+		sub_pk, req_date, req_note, req_master,req_status)
+		values(#{e_pk},#{sub_pk},#{req_date},#{req_note},#{req_master},#{req_status})
+	</insert>
+
+	<resultMap type="Requests" id="AllEmployeeRequests">
+		<id column="req_pk" property="req_pk" />
+		<result column="req_date" property="req_date" />
+		<result column="req_note" property="req_note" />
+		<result column="req_master" property="req_master" />
+		<result column="req_status" property="req_status" />
+		<!-- <result column="e_pk" property="e_pk"/> -->
+		<association column="sub_pk" property="subCategory"
+			javaType="SubCategory" select="SubCategory.select" />
+		<association column="top_pk" property="topCategory"
+			javaType="TopCategory" select="TopCategory.select" />
+	</resultMap>
+
+	<!-- 특정 사원에 대한 전체 requests -->
+	<select id="selectByEmployee" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk,
+		req_date, req_note, req_master, req_status
+		from
+		subcategory s, requests r, topcategory t
+		where t.top_pk = s.top_pk
+		and
+		s.sub_pk = r.sub_pk
+		and e_pk=#{e_pk} order by req_date desc;
+	</select>
+	
+	<!--로그인한 사원의 미승인 근무 요청 -->
+	<select id="selectNoWork" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk, req_date
+		, req_note, req_master,req_status
+		from subcategory s, requests r, topcategory t
+		where t.top_pk=s.top_pk
+		and
+		s.sub_pk=r.sub_pk
+		and req_status=0
+		and e_pk=#{e_pk}
+		and t.top_pk=2;
+	</select>
+
+	<!-- 로그인한 사원의 미승인 휴가 요청 -->
+	<select id="selectNoDayoff" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk, req_date
+		, req_note, req_master,req_status
+		from subcategory s, requests r, topcategory t
+		where t.top_pk=s.top_pk
+		and
+		s.sub_pk=r.sub_pk
+		and req_status=0
+		and e_pk=#{e_pk}
+		and t.top_pk=1;
+	</select>
+
+	<!-- 로그인한 사원의 승인완료 요청 -->
+	<select id="selectOkRequests" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk, req_date
+		, req_note, req_master,req_status
+		from subcategory s, requests r, topcategory t
+		where t.top_pk=s.top_pk
+		and
+		s.sub_pk=r.sub_pk
+		and req_status=1
+		and e_pk=#{e_pk}
+	</select>
+
+	<!-- 특정 사원의 휴가 -->
+	<select id="selectDayoff" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk, req_date
+		, req_note, req_master,req_status
+		from subcategory s, requests r, topcategory t
+		where t.top_pk=s.top_pk
+		and
+		s.sub_pk=r.sub_pk
+		and e_pk=#{e_pk}
+		and t.top_pk=1;
+	</select>
+
+	<!-- 특정 사원의 근무 -->
+	<select id="selectWork" parameterType="int"
+		resultMap="AllEmployeeRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name, req_pk, req_date
+		, req_note, req_master,req_status
+		from subcategory s, requests r, topcategory t
+		where t.top_pk=s.top_pk
+		and
+		s.sub_pk=r.sub_pk
+		and e_pk=#{e_pk}
+		and t.top_pk=2;
+	</select>
+	
+	<resultMap type="Requests" id="WorkRequests">
+		<id column="req_pk" property="req_pk" />
+		<result column="req_date" property="req_date" />
+		<result column="req_note" property="req_note" />
+		<result column="req_master" property="req_master" />
+		<result column="req_status" property="req_status" />
+		<!-- <result column="e_pk" property="e_pk"/> -->
+		<association column="sub_pk" property="subCategory"
+			javaType="SubCategory" select="SubCategory.select" />
+		<association column="top_pk" property="topCategory"
+			javaType="TopCategory" select="TopCategory.select" />
+		<association column="e_pk" property="employee"
+			javaType="Employee" select="Employee.selectNow" />
+	</resultMap>
+
+	<!-- 근무 휴가 둘다 가져오기 -->
+	<select id="selectAll" parameterType="int"
+		resultMap="WorkRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk,
+		s.sub_name,
+		e.e_pk as e_pk, e.e_name,
+		req_pk, req_date, req_note, req_master, req_status
+		from subcategory s,
+		requests r, topcategory t, employee e
+		where t.top_pk = s.top_pk
+		and
+		s.sub_pk = r.sub_pk
+		and e.e_pk = r.e_pk
+		and r.req_status=#{req_status}
+		order by req_date desc
+	</select>
+
+	<!-- 승인 대기중 근무/휴가 가져오기 -->
+	<select id="selectByWork" parameterType="int"
+		resultMap="WorkRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk, s.sub_name,
+		e.e_pk as e_pk, e.e_name,
+		req_pk, req_date, req_note, req_master, req_status
+		from subcategory s,
+		requests r, topcategory t, employee e
+		where t.top_pk = s.top_pk
+		and
+		s.sub_pk = r.sub_pk
+		and e.e_pk = r.e_pk
+		and t.top_pk = #{top_pk} <!--휴가 = 
+			1, 근무 = 2 -->
+		and r.req_status=0 order by req_date desc
+	</select>
+
+	<!-- 승인 완료된 근무/휴가 가져오기 -->
+	<select id="selectByApprove" parameterType="int"
+		resultMap="WorkRequests">
+		select t.top_pk as top_pk, t.top_name, s.sub_pk as sub_pk, s.sub_name,
+		e.e_pk as e_pk, e.e_name,
+		req_pk, req_date, req_note, req_master, req_status
+		from subcategory s,
+		requests r, topcategory t, employee e
+		where t.top_pk = s.top_pk
+		and
+		s.sub_pk = r.sub_pk
+		and e.e_pk = r.e_pk
+		and t.top_pk = #{top_pk} <!--휴가 = 
+			1, 근무 = 2 -->
+		and r.req_status=1 order by req_date desc
+	</select>
+
+	<!-- 승인 요청 -->
+	<update id="approve" parameterType="Requests">
+		update requests set
+		req_status=1 where req_pk=#{req_pk}
+	</update>
+
+	<!-- 승인 거절 -->
+	<update id="reject" parameterType="Requests">
+		update requests set
+		req_status=3, req_note= #{req_note} where req_pk=#{req_pk}
+	</update>
+
+</mapper>
