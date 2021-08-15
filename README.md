@@ -37,6 +37,7 @@
 <br>
 2) 카테고리 휴가로 선택한 경우
 
+![image](https://user-images.githubusercontent.com/75840459/129469027-65f7ae53-89e8-4184-a266-42d6bbd4792e.png)
 
 
 
