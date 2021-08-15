@@ -47,6 +47,13 @@
 
 <br>
 2) 요청 페이지<br>
+- 요청페이지의 캘린더에서는 자신의 요청대기, 요청 거절, 요청 승인 일정을 모두 확인할 수있음<br>
 
-![image](https://user-images.githubusercontent.com/75840459/129469217-40699fa3-216c-4718-9b54-0fd7d0e326bb.png)
+
+![ezgif com-gif-maker (23)](https://user-images.githubusercontent.com/75840459/129469936-f791f11e-42bd-4a2c-b9ac-12cd5c370022.gif)
+
+<br>
+3) 출,퇴근 요청<br>
+
+
 
