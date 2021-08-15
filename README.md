@@ -65,4 +65,11 @@
 ![ezgif com-gif-maker (24)](https://user-images.githubusercontent.com/75840459/129470519-c0b47b78-e5a7-443e-ac2c-d6aa2b2e6408.gif)
 
 
+<br>
+5) 출퇴근 목록
+
+![image](https://user-images.githubusercontent.com/75840459/129470549-eb17a7d1-7e71-4b4c-81b6-252f9828dcea.png)
+
+<br>
+6) 설정, 로그아웃
 
