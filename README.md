@@ -73,3 +73,4 @@
 <br>
 6) 설정, 로그아웃
 
+![ezgif com-gif-maker (25)](https://user-images.githubusercontent.com/75840459/129471440-c516d38d-3fcd-4dc9-9b40-c1e122a1b0a8.gif)
