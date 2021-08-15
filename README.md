@@ -35,9 +35,11 @@
 ![image](https://user-images.githubusercontent.com/75840459/129468883-a3ea6864-8565-4ef3-97e6-d674a8e56e8c.png)
 
 <br>
-2) 카테고리 휴가로 선택한 경우
+< 카테고리 휴가로 선택한 경우 ><br>
+- 승인을 대기중인 요청도 캘린더에 나타남<br>
 
-![image](https://user-images.githubusercontent.com/75840459/129469027-65f7ae53-89e8-4184-a266-42d6bbd4792e.png)
+![image](https://user-images.githubusercontent.com/75840459/129469105-0188bddc-cb0d-4735-8b68-fe733a920e2a.png)
+
 
 
 
