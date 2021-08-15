@@ -40,6 +40,12 @@
 
 ![image](https://user-images.githubusercontent.com/75840459/129469105-0188bddc-cb0d-4735-8b68-fe733a920e2a.png)
 
+<br>
+< 카테고리 근무로 선택한 경우 ><br>
 
+![image](https://user-images.githubusercontent.com/75840459/129469138-51aa0d9e-4cb7-44bc-b520-ffcb4bbffb66.png)
+
+<br>
+2) 요청 페이지<br>
 
 
